@@ -1,5 +1,6 @@
-import json
+import csv
 from datetime import datetime, timedelta
+import json
 
 import requests
 
@@ -13,7 +14,6 @@ try:
         GITHUB_REPO,
         GITHUB_USERNAME,
         GITHUB_PASSWORD,
-        CACHE_FILENAME
     )
 except ImportError:
     print('No config file set!')
@@ -22,7 +22,8 @@ except ImportError:
 
 
 GITHUB_URL = 'https://api.github.com/{}'
-
+CACHE_FILENAME = 'records.json'
+RECORDS_FILENAME = 'records.csv'
 
 def main():
     # Prepare data to send
@@ -76,7 +77,21 @@ def main():
             else:
                 devs[username].commits += 1
 
-        print(devs)
+        # Write records to a CSV file to be read in by display script
+        with open(RECORDS_FILENAME, 'w') as csv_file:
+            fieldnames = ['Username', 'Avatar', 'Commits', 'Hash']
+            writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+            writer.writeheader()
+
+            for dev in devs.values():
+                #import pdb; pdb.set_trace()
+                data = {
+                    'Username': dev.username,
+                    'Avatar': dev.avatar_url,
+                    'Commits': dev.commits,
+                    'Hash': dev.hash
+                }
+                writer.writerow(data)
 
     except requests.exceptions.ConnectionError as conn_error:
         error_type = type(conn_error[0])

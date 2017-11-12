@@ -2,3 +2,4 @@ env/
 config.py
 *.json
 *.py[cod]
+*.csv
