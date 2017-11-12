@@ -25,6 +25,7 @@ GITHUB_URL = 'https://api.github.com/{}'
 CACHE_FILENAME = 'records.json'
 RECORDS_FILENAME = 'records.csv'
 
+
 def main():
     # Prepare data to send
     # Get modified_since header to send in request
