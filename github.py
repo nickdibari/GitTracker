@@ -1,6 +1,3 @@
-# Nicholas DiBari
-# github.py
-# Script to gather commit data from a specified Github repository
 import json
 from datetime import datetime, timedelta
 
