@@ -14,6 +14,7 @@ try:
         GITHUB_REPO,
         GITHUB_USERNAME,
         GITHUB_PASSWORD,
+        RECORDS_FILENAME
     )
 except ImportError:
     print('No config file set!')
@@ -23,7 +24,6 @@ except ImportError:
 
 GITHUB_URL = 'https://api.github.com/{}'
 CACHE_FILENAME = 'records.json'
-RECORDS_FILENAME = 'records.csv'
 
 
 def main():

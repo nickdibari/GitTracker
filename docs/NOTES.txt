@@ -78,6 +78,10 @@ Process
             - Avatar URL
             - Commit count
 
+    How to display leaderboard?
+        - Tkinter
+        - HTML file opened in a webbrowser
+
 README
     Document how to setup config file
          - Variable names and where to find them
