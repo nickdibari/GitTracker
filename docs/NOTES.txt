@@ -79,8 +79,13 @@ Process
             - Commit count
 
     How to display leaderboard?
-        - Tkinter
         - HTML file opened in a webbrowser
+            Use Jingja templating to format an HTML file with the proper data
+            Javascript function to display current date/time
+            How to update leaderboard?
+        - Why not just write the display in Flask?
+            Can handle the templating for you
+            Devs can look at the leaderboard on their machine
 
 README
     Document how to setup config file

@@ -1,0 +1,11 @@
+<html>
+    <header>
+        <title>Github Leaderboard</title>
+    </header>
+    <body>
+        <h1>Github Leaderboard</h1>
+        {% for name, commits in devs %}
+            <img href="{{name}}">
+            <p>{{commits}}</p>
+    </body>
+</html>
