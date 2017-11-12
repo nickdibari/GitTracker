@@ -4,8 +4,9 @@
     </header>
     <body>
         <h1>Github Leaderboard</h1>
-        {% for name, commits in devs %}
-            <img href="{{name}}">
-            <p>{{commits}}</p>
+        {% for dev in devs %}
+            <img src={{dev.avatar}}>
+            <p>{{dev.commits}}</p>
+        {% endfor %}
     </body>
 </html>
