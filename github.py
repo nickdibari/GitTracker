@@ -84,7 +84,6 @@ def main():
             writer.writeheader()
 
             for dev in devs.values():
-                #import pdb; pdb.set_trace()
                 data = {
                     'Username': dev.username,
                     'Avatar': dev.avatar_url,
