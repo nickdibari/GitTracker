@@ -1,0 +1,83 @@
+Github API Notes
+    - Base url: https://api.github.com
+
+    Add Accept headers to ensure correct version is used
+        > Accept: application/vnd.github.v3+json
+
+    All requests served over HTTPS
+
+    - Date format: YYYY-MM-DDTHH:MM:SSZ
+
+    Authentication
+        Authenticate with your user and password sent in the request
+            > requests.get(url, auth=(username, password))
+
+        Could also authenticate with OAuth2 token, if doing so pass in header
+            > Authorization: token OAUTH-TOKEN
+
+    Rate limiting
+        Authenticated application have a rate limit of 5000 requests per hour
+
+    MUST included a valid User-Agent header by default
+        Recommend you use your Github username
+        > User-Agent: nickdibari (ndibari95 in prod)
+
+    Many responses include a last modified header that you should use to check if the data being requested has been modified since you last asked for it
+        Doesn't count against rate limits, so could save some calls
+        > If-Modified-Since: <some standard time amount>
+
+    Resources may have URL properties assosciated with them
+        Recommend you follow these links instead of building your own URL
+
+Objective
+    - Build a script that will take a repo, analyze commits this week, and return a list
+    of the top contributors for the week
+    - Display number of commits, and optionally include lines added/deleted
+
+    Step 1: Get data from Github API
+        Make request to a repo's commits
+
+        If updated since last requested:
+            For each record in response:
+                Increment dev commit count
+                [Update lines added/deleted]
+
+        Save map of dev work log to a file
+
+    Step 2: Display data in UX
+        Read file containing dev work log
+
+        Display current date/time
+
+        Display table of dev work
+            - Top 5 (?)
+            - Profile pic & username
+                -> record['author']['avatar_url']
+            - Commits
+            - [Lines added/deleted]
+
+Process
+    How to get commits for a repo?
+        GET /repos/:owner/:repo/commits
+            @owner: Organization/User that owns repo
+            @repo: Name of repository to lookup
+
+    Need to specify branch to lookup
+        Default would be staging
+        Consider looping through all branches in a repo?
+
+    Params
+        sha: SHA or branch to start listing commits from
+        since: Timestamp to start reading from
+
+    Dev Object
+        Representation of a developer in the repository
+            - Username
+            - Avatar URL
+            - Commit count
+
+README
+    Document how to setup config file
+         - Variable names and where to find them
+    How to run script needed to populate DB
+    How to run script that displays leaderboard
