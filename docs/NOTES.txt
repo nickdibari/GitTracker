@@ -22,7 +22,9 @@ Github API Notes
         Recommend you use your Github username
         > User-Agent: nickdibari (ndibari95 in prod)
 
-    Many responses include a last modified header that you should use to check if the data being requested has been modified since you last asked for it
+    Many responses include a last modified header that you should
+    use to check if the data being requested has been modified
+    since you last asked for it
         Doesn't count against rate limits, so could save some calls
         > If-Modified-Since: <some standard time amount>
 
