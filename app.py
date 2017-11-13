@@ -26,10 +26,19 @@ app = Flask(__name__, template_folder='assets/templates')
 
 
 def get_dev_stats():
-        # Prepare data to send
-    # Get modified_since header to send in request
-    modified_since = datetime.utcnow() - timedelta(minutes=15)
-    modified_since_header = modified_since.strftime('%a, %d %b %Y %H:%M:%S GMT')
+    # Prepare data to send
+    try:
+        fp = open(CACHE_FILENAME, 'r')
+
+        # Get modified_since header to send in request
+        modified_since = datetime.utcnow() - timedelta(minutes=15)
+        format = '%a, %d %b %Y %H:%M:%S GMT'
+        modified_since_header = modified_since.strftime(format)
+
+        fp.close()
+    except IOError:
+        # Results have not been cached yet, so retrieve API response
+        modified_since_header = None
 
     headers = {
         'User-Agent': GITHUB_USERNAME,
@@ -91,6 +100,7 @@ def get_dev_stats():
 @app.route('/')
 def index():
     dev_table = get_dev_stats()
+    # Sort devs by number of commits
     devs = sorted(dev_table.values(), key=lambda x: x['commits'], reverse=True)
 
     return render_template(
