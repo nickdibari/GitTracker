@@ -20,6 +20,8 @@ DEBUG = {True/False}
 1. Setup the virtual environment
 
     `virtualenv env`
+    `source env/bin/activate`
+
 2. Install the requirements
 
     `pip install -r requirements.txt`
