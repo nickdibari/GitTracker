@@ -12,6 +12,7 @@ try:
         GITHUB_REPO,
         GITHUB_USERNAME,
         GITHUB_PASSWORD,
+        DEBUG
     )
 except ImportError:
     print('No config file set!')
@@ -99,4 +100,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=DEBUG)
