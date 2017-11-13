@@ -1,8 +1,8 @@
-#GitTracker
+# GitTracker
 
 Flask application to display a leaderboard for a repository's contributors
 
-##Setup
+## Setup
 
 GitTracker requires a configuration file to set the repository to track, authentication
 for the Github API, and to set the debug variable for the Flask app. To set this file,
@@ -15,7 +15,7 @@ GITHUB_PASSWORD = '{password}'
 DEBUG = {True/False}
 ```
 
-##Running the application
+## Running the application
 
 1. Setup the virtual environment
 
