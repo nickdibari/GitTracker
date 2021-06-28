@@ -1,5 +1,9 @@
-env/
-config.py
 *.json
 *.py[cod]
 *.csv
+
+env/
+venv/
+.idea/
+
+config.py
