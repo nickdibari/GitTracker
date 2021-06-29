@@ -32,8 +32,8 @@ def get_dev_stats():
 
         # Get modified_since header to send in request
         modified_since = datetime.utcnow() - timedelta(minutes=15)
-        format = '%a, %d %b %Y %H:%M:%S GMT'
-        modified_since_header = modified_since.strftime(format)
+        date_format = '%a, %d %b %Y %H:%M:%S GMT'
+        modified_since_header = modified_since.strftime(date_format)
 
         fp.close()
     except IOError:
@@ -90,23 +90,23 @@ def get_dev_stats():
         return devs
 
     except requests.exceptions.ConnectionError as conn_error:
-        error_type = type(conn_error[0])
-        url = conn_error[0].url
+        error_type = conn_error
+        url = conn_error.request.url
 
-        print('Caught a ConnectionError: {}').format(error_type)
+        print('Caught a ConnectionError: {}'.format(error_type))
         print('Trying to get URL: {}'.format(url))
+
+        raise
 
 
 @app.route('/')
 def index():
     dev_table = get_dev_stats()
+
     # Sort devs by number of commits
     devs = sorted(dev_table.values(), key=lambda x: x['commits'], reverse=True)
 
-    return render_template(
-        'display.html',
-        devs=devs
-    )
+    return render_template('display.html', devs=devs)
 
 
 if __name__ == '__main__':
