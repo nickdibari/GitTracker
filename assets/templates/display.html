@@ -1,12 +1,22 @@
-<html>
-    <header>
+<html lang="en">
+    <head>
         <title>Github Leaderboard</title>
-    </header>
+    </head>
     <body>
         <h1>Github Leaderboard</h1>
-        {% for dev in devs %}
-            <img src={{dev.avatar}}>
-            <p>{{dev.commits}}</p>
-        {% endfor %}
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Avatar</th>
+                <th>Commits</th>
+            </tr>
+            {% for dev in devs %}
+                <tr>
+                    <td>{{ dev.login }}</td>
+                    <td><img src="{{ dev.avatar }}" alt="dev-avatar" width="100" height="100"></td>
+                    <td>{{ dev.commits }}</td>
+                </tr>
+            {% endfor %}
+        </table>
     </body>
 </html>

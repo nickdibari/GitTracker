@@ -81,6 +81,7 @@ def get_dev_stats():
             if not devs.get(username):
                 avatar_url = record['author']['avatar_url']
                 devs[username] = {}
+                devs[username]['login'] = username
                 devs[username]['avatar'] = avatar_url
                 devs[username]['commits'] = 1
 
