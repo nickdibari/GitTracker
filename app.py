@@ -1,8 +1,10 @@
-from datetime import datetime, timedelta
+import os
 import json
+from datetime import datetime, timedelta
 
-from flask import Flask, render_template
 import requests
+from flask import Flask, render_template
+
 
 # Import the configuration settings for the script
 # TODO: Maybe handle this in a more efficient way?
@@ -26,19 +28,13 @@ app = Flask(__name__, template_folder='assets/templates')
 
 
 def get_dev_stats():
-    # Prepare data to send
-    try:
-        fp = open(CACHE_FILENAME, 'r')
+    modified_since_header = None
 
+    if os.path.exists(CACHE_FILENAME):
         # Get modified_since header to send in request
         modified_since = datetime.utcnow() - timedelta(minutes=15)
         date_format = '%a, %d %b %Y %H:%M:%S GMT'
         modified_since_header = modified_since.strftime(date_format)
-
-        fp.close()
-    except IOError:
-        # Results have not been cached yet, so retrieve API response
-        modified_since_header = None
 
     headers = {
         'User-Agent': GITHUB_USERNAME,
