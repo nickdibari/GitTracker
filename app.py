@@ -76,6 +76,10 @@ def get_dev_stats():
         devs = {}
 
         for record in records:
+            # Skip over commits that are just merge commits
+            if 'Merge pull request' in record['commit']['message']:
+                continue
+
             username = record['commit']['author']['name']
 
             if not devs.get(username):
